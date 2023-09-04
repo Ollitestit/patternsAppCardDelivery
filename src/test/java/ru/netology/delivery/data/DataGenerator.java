@@ -2,7 +2,6 @@ package ru.netology.delivery.data;
 
 import com.github.javafaker.Faker;
 import lombok.Value;
-import lombok.val;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,9 +15,11 @@ public class DataGenerator {
     public static String generateDate(int shift) {
         return LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
-    public static String generateCity(String locale) {
-        var faker = new Faker(new Locale(locale));
-        return faker.address().city();
+
+    public static String generateCity() {
+        var cities = new String[]{"Абакан", "Анадырь", "Архангельск", "Астрахань", "Барнаул", "Белгород", "Биробиджан", "Благовещенск", "Брянск",
+                "Великий Новгород", "Владивосток", "Владикавказ", "Владимир", "Волгоград", "Вологда", "Воронеж", "Горно-Алтайск", "Екатеринбург"};
+        return cities[new Random().nextInt(cities.length)];
     }
 
     public static String generateName(String locale) {
@@ -36,7 +37,7 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) {
-            return new UserInfo(generateCity(locale), generateName(locale), generatePhone(locale));
+            return new UserInfo(generateCity(), generateName(locale), generatePhone(locale));
         }
     }
 
